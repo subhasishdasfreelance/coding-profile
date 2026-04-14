@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "quick commit",
+      "type": "shell",
+      "command": "git add . && git commit -m \"wip\"",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    },
+    {
+      "label": "squash last wip commits",
+      "type": "shell",
+      "command": "N=$(git log --pretty=format:%s | awk '{ if (tolower($0) ~ /^wip/) c++; else exit } END { print c+0 }'); if [ \"$N\" -eq 0 ]; then echo \"No consecutive wip commits\"; exit 0; fi; echo \"Found $N wip commits\"; git reset --soft HEAD~$N",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    }
+  ]
+}
