@@ -1,0 +1,31 @@
+# To work with a new key do the following
+# 1. Create the key with new encryption. Example ==> ssh-keygen -t ed25519 -C "nextcraft key subhasish.nextcraft@gmail.com"
+# 2. Add the new key in github and ssh config
+# 3. Run "ssh hostname" once to add it to agent and all. Example "ssh github-personal"
+# 4. When adding remote use this new hostname, so that,
+# git remote add origin git@github.com:subhasish-nextcraft/nextcraft-site.git
+# will become
+# git remote add origin git@github-nextcraft:subhasish-nextcraft/nextcraft-site.git
+
+Host *
+  AddKeysToAgent yes
+
+Host example
+	HostName 13.48.202.248
+	User ubuntu
+	IdentityFile ~/.ssh/exampleKey.pem
+	IdentitiesOnly yes
+
+#comment
+Host github.com
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/id_ed25519
+	IdentitiesOnly yes
+
+#alias account
+Host github.com-hk
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/id_rsa_alias
+	IdentitiesOnly yes
